@@ -1,4 +1,4 @@
-[![Build Status](https://codeship.com/projects/53c4e300-e1cf-0135-85bf-62c27b79889e/status?branch=master)](https://codeship.com/projects/53c4e300-e1cf-0135-85bf-62c27b79889e/status?branch=master))
+[![Build Status](https://codeship.com/projects/53c4e300-e1cf-0135-85bf-62c27b79889e/status?branch=master)](https://codeship.com/projects/53c4e300-e1cf-0135-85bf-62c27b79889e/status?branch=master)
 [![Code Climate](https://codeclimate.com/github/lbarstow/poro-game-reviews/badges/gpa.svg)](https://codeclimate.com/github/lbarstow/poro-game-reviews)
 [![Coverage Status](https://coveralls.io/repos/github/lbarstow/poro-game-reviews/badge.svg?branch=master)](https://coveralls.io/github/lbarstow/poro-game-reviews?branch=master)
 
