@@ -1,4 +1,12 @@
-# README
+# Poro Game Reviews
+
+This is a review site for tabletop games.
+
+* Jack Mitcham
+* Laura Barstow
+* Sean Fitzgerald
+* Michalina Jablonska
+
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
