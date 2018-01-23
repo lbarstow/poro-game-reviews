@@ -5,10 +5,12 @@ class App extends React.Component {
     super(props);
     this.state = {}
   }
+
   render() {
+
     return (
       <div>
-        <h1> Hello from the React App page</h1>
+        <h1>Hello from the React App file</h1>
       </div>
     )
   }

@@ -1,8 +1,7 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
-import jQuery from 'jquery'
 
-jQuery(() => {
+document.addEventListener('ready', () => {
   ReactDOM.render(
     <App />,
     document.getElementById('app')
