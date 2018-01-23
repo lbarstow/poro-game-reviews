@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::GamesController, type: :controller do
-  let!(:first_game) { Game.create(name: "Arkham Horror", min_player_count: 1, max_player_count: 8, description: "Horror game where you can punch Cthulhu in the face") }
+  let!(:first_game) { Game.create!(name: "Arkham Horror", min_player_count: 1, max_player_count: 8, description: "Horror game where you can punch Cthulhu in the face") }
 
   describe "GET#index" do
     it "should return a list of games" do
