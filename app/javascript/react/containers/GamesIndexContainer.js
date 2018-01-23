@@ -9,10 +9,38 @@ class GamesIndexContainer extends Component {
     };
   }
 
+  componentDidMount() {
+    fetch('/api/v1/games')
+      .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          let errorMessage = `${response.status} (${response.statusText})`,
+              error = new Error(errorMessage);
+          throw(error);
+        }
+      })
+      .then(response => response.json())
+      .then(body => {
+        this.setState({ games: body })
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
   render() {
+    let games = this.state.games.map( game => {
+      let shortDescription = game.description.substring(0, 60).concat('...');
+      return(
+        <GameTile
+          key={game.id}
+          name={game.name}
+          description={shortDescription}
+        />
+      )
+    })
     return(
       <div>
-        <GameTile />
+        {games}
       </div>
     )
   }

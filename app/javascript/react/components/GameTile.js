@@ -3,7 +3,9 @@ import React from "react";
 const GameTile = (props) => {
   return(
     <div>
-      <p>This is a GameTile</p>
+      <h5>{props.name}</h5>
+      <h6>Category</h6>
+      <p>{props.description}</p>
     </div>
   )
 }
