@@ -10,6 +10,6 @@ end
 
 if !Review.first
   30.times do
-    Review.create!(rating: Faker::Number.between(1,5), body: Faker::Hipster.sentences(3).join(' '), game_id: Faker::Number.between(1,10), user_id: 1, victory_points: Faker::Number.between(1,100))
+    Review.create!(rating: Faker::Number.between(1,5), body: Faker::Hipster.sentences(3).join(' '), game: Game.order("RANDOM()").first, user: User.first, victory_points: Faker::Number.between(1,100))
   end
 end
