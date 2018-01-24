@@ -7,13 +7,17 @@ RSpec.describe Api::V1::ReviewsController, type: :controller do
 
   describe "GET#index" do
     it "shows reviews for a specified game" do
-      get :index, id: game_one.id
+      get :index, params: {game_id: game_one.id}
       returned_json = JSON.parse(response.body)
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq("application/json")
 
       expect(returned_json.length).to eq 1
+      expect(returned_json[0]["rating"]).to eq 4
+      expect(returned_json[0]["body"]).to eq "Great game!!!"
+      expect(returned_json[0]["victory_points"]).to eq 1
+      expect(returned_json[0]["game_id"]).to eq game_one.id
 
     end
   end
