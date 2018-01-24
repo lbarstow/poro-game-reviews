@@ -10,7 +10,7 @@ class GamesIndexContainer extends Component {
   }
 
   componentDidMount() {
-    fetch('/api/v1/games')
+    fetch('/api/v1/games.json')
       .then(response => {
         if (response.ok) {
           return response;
@@ -28,10 +28,11 @@ class GamesIndexContainer extends Component {
   }
 
   render() {
-    let games = this.state.games.map( game => {
+    let gameTiles = this.state.games.map( game => {
       let shortDescription = game.description.substring(0, 60).concat('...');
       return(
         <GameTile
+          id={game.id}
           key={game.id}
           name={game.name}
           description={shortDescription}
@@ -39,8 +40,8 @@ class GamesIndexContainer extends Component {
       )
     })
     return(
-      <div>
-        {games}
+      <div className = "row">
+        {gameTiles}
       </div>
     )
   }
