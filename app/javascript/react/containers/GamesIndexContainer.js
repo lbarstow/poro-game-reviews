@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import GameTile from "../components/GameTile";
+import GameFormTile from "../components/GameFormTile";
 
 class GamesIndexContainer extends Component {
   constructor(props) {
@@ -42,6 +43,7 @@ class GamesIndexContainer extends Component {
     return(
       <div className = "row">
         {gameTiles}
+        <GameFormTile/>
       </div>
     )
   }

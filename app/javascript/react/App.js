@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GamesIndexContainer from './containers/GamesIndexContainer';
+import GameFormContainer from './containers/GameFormContainer';
 
 class App extends Component {
   constructor(props) {
