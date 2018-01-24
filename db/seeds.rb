@@ -1,5 +1,5 @@
 if !User.first
-  User.create!(email: Faker::Internet.email, password: 'jhkasdfhjkl', sign_in_count: 2)
+  User.create!(email: Faker::Internet.email, password: 'jhkasdfhjkl', username: 'first_user', sign_in_count: 2)
 end
 
 if !Game.first
