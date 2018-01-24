@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :games, only: [:index] do
         resources :reviews, only: [:index]
+        resources :categories, only: [:index]
+      end
+      resources :categories, only: [:index] do
+        resources :games, only: [:index]
       end
     end
   end
