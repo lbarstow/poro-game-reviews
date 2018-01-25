@@ -13,12 +13,17 @@ class Api::V1::GamesController < ApplicationController
   end
 
   def create
-    game = Game.new(name: params[:name], description: params[:description], min_player_count: params[:min_player_count], max_player_count: params[:max_player_count])
+    game = Game.new(game_params)
     if game.save
       render json: { game: game}
     else
       puts game.errors.full_messages
       render json: {error: game.errors.full_messages}, status: :unprocessable_entity
     end
+  end
+  private
+
+  def game_params
+    params.require(:game).permit(:name, :description, :min_player_count, :max_player_count)
   end
 end
