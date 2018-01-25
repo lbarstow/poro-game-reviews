@@ -1,12 +1,26 @@
 import React, { Component } from "react";
 import GameTile from "../components/GameTile";
+import CategoryButton from "../components/CategoryButton";
+
 
 class GamesIndexContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      games: []
+      games: [],
+      categories: [],
+      category: null
     };
+    this.handleCategoryClick = this.handleCategoryClick.bind(this);
+  }
+
+  handleCategoryClick(event) {
+    if (this.state.category === event.target.text) {
+      this.setState({ category: null })
+    } else {
+      let value = event.target.text
+      this.setState({ category: value })
+    }
   }
 
   componentDidMount() {
@@ -25,9 +39,34 @@ class GamesIndexContainer extends Component {
         this.setState({ games: body })
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
+    fetch('/api/v1/categories.json')
+      .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          let errorMessage = `${response.status} (${response.statusText})`,
+              error = new Error(errorMessage);
+          throw(error);
+        }
+      })
+      .then(response => response.json())
+      .then(body => {
+        this.setState({ categories: body })
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   render() {
+    let categoryButtons = this.state.categories.map( category => {
+
+      return(
+        <CategoryButton
+          name = {category.name}
+          handleClick = {this.handleCategoryClick}
+        />
+      )
+    })
+
     let gameTiles = this.state.games.map( game => {
       let shortDescription = game.description.substring(0, 60).concat('...');
       let categories = ''
@@ -35,17 +74,19 @@ class GamesIndexContainer extends Component {
         categories += `${category.name}, `
       })
       categories = categories.replace(/,\s*$/, "")
-      return(
-        <li>
-        <GameTile
-          id={game.id}
-          key={game.id}
-          name={game.name}
-          categories = {categories}
-          description={shortDescription}
-        />
-        </li>
-      )
+      if (categories.includes(this.state.category) || this.state.category ===null) {
+        return(
+          <li>
+          <GameTile
+            id={game.id}
+            key={game.id}
+            name={game.name}
+            categories = {categories}
+            description={shortDescription}
+          />
+          </li>
+        )
+      }
     })
     return(
         <div className = "row games-container">
@@ -53,18 +94,7 @@ class GamesIndexContainer extends Component {
           <hr/>
 
           <ul className="button-group even-6 ">
-            <li><a href="#" className="button tiny">Category 1</a></li>
-            <li><a href="#" className="button tiny">Category 2</a></li>
-            <li><a href="#" className="button tiny">Category 3</a></li>
-            <li><a href="#" className="button tiny">Category 4</a></li>
-            <li><a href="#" className="button tiny">Category 5</a></li>
-            <li><a href="#" className="button tiny">Category 6</a></li>
-            <li><a href="#" className="button tiny">Category 7</a></li>
-            <li><a href="#" className="button tiny">Category 8</a></li>
-            <li><a href="#" className="button tiny">Category 9</a></li>
-            <li><a href="#" className="button tiny">Category 10</a></li>
-            <li><a href="#" className="button tiny">Category 11</a></li>
-            <li><a href="#" className="button tiny">Category 12</a></li>
+            {categoryButtons}
           </ul>
 
           <ul className= "small-block-grid-3">
