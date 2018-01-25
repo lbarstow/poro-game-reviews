@@ -7,6 +7,7 @@ describe('GameTile', () => {
       <GameTile
         name="Catan"
         description="This is described"
+        categories="Euro"
       />
     )
   })
@@ -25,7 +26,7 @@ describe('GameTile', () => {
   })
 
   it('should have expected content in h6 tag', () => {
-    expect(wrapper.find('h6').text()).toBe('Categories')
+    expect(wrapper.find('h6').text()).toBe('Euro')
   })
 
   it('should have a p tag', () => {
