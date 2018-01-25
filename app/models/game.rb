@@ -8,4 +8,6 @@ class Game < ApplicationRecord
   validates :max_player_count, allow_nil: true, numericality: { only_integer: true }
 
   has_many :reviews
+  has_many :game_categorizations
+  has_many :categories, through: :game_categorizations
 end

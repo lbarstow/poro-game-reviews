@@ -11,7 +11,6 @@ class App extends Component {
 
     return (
       <div>
-        <h1>Hello from the React App file</h1>
         <GamesIndexContainer />
       </div>
     )

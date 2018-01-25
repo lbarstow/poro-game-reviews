@@ -13,11 +13,11 @@ describe('GameTile', () => {
 
 
   it('should have an h5 tag', () => {
-    expect(wrapper.find('h5').length).toEqual(1)
+    expect(wrapper.find('h4').length).toEqual(1)
   })
 
   it('should have expected content in h5 tag', () => {
-    expect(wrapper.find('h5').text()).toBe('Catan')
+    expect(wrapper.find('h4').text()).toBe('Catan')
   })
 
   it('should have an h6 tag', () => {
@@ -25,7 +25,7 @@ describe('GameTile', () => {
   })
 
   it('should have expected content in h6 tag', () => {
-    expect(wrapper.find('h6').text()).toBe('Category')
+    expect(wrapper.find('h6').text()).toBe('Categories')
   })
 
   it('should have a p tag', () => {
