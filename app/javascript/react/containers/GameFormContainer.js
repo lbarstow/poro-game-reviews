@@ -19,22 +19,18 @@ class GameFormContainer extends Component {
 
   handleTitleChange(event) {
     this.setState({ title: event.target.value });
-    console.log(this.state.title)
   }
 
   handleDescriptionChange(event) {
     this.setState({ description: event.target.value });
-    console.log(this.state.description)
   }
 
   handleMinPlayerChange(event) {
     this.setState({ minPlayers: event.target.value });
-    console.log(this.state.minPlayers)
   }
 
   handleMaxPlayerChange(event) {
     this.setState({ maxPlayers: event.target.value });
-    console.log(this.state.maxPlayers)
   }
 
 

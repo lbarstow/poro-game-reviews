@@ -15,3 +15,42 @@
  *= require foundation_and_overrides
 
  */
+body {
+  background-color: lightgrey;
+}
+
+.panel {
+  padding: 20px;
+}
+
+.games-container {
+  padding: 20px;
+}
+
+.main-title {
+  padding: 10px;
+  font-size: 4em;
+  font-family: fantasy, cursive, sans-serif;
+}
+
+h4.game-name {
+  color: #047BA7;
+
+}
+
+.view-game {
+  background-color: #fd8627;
+  color: black;
+  border: 2px outset darkgrey;
+}
+
+.categories {
+  font-style: italic;
+  font-weight: 500;
+  color: darkgrey;
+}
+
+.fa-plus {
+  color: green;
+  font-size: 60px;
+}

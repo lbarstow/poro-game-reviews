@@ -7,6 +7,4 @@ describe('Home page should have content', () => {
       <App />
     )
   })
-
-  
 })

@@ -2,11 +2,14 @@ import React from "react";
 
 const GameTile = (props) => {
   return(
-      <div className = "panel small-3 columns" >
-        <h5>{props.name}</h5>
-        <h6>Category</h6>
+    <div className = 'panel'>
+        <h4 className="game-name small-12 small-centered columns">{props.name}</h4>
+        <hr/>
+        <h6 className = "categories">Categories</h6>
+        <hr/>
         <p>{props.description}</p>
-      </div>
+        <a href='#' className="button view-game small-12 small-centered columns"> View Game </a>
+    </div>
   )
 }
 
