@@ -20,7 +20,7 @@ class Api::V1::GamesController < ApplicationController
       puts game.errors.full_messages
       render json: {error: game.errors.full_messages}, status: :unprocessable_entity
     end
-  end
+  end  
   private
 
   def game_params
