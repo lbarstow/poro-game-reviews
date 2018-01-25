@@ -7,7 +7,7 @@ class Api::V1::CategoriesController < ApplicationController
       render json: game_categories
     else
       categories = Category.all
-      render json: categories
+      render json: categories, include: [:games]
     end
   end
 end

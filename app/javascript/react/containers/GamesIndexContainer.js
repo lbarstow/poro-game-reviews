@@ -30,12 +30,18 @@ class GamesIndexContainer extends Component {
   render() {
     let gameTiles = this.state.games.map( game => {
       let shortDescription = game.description.substring(0, 60).concat('...');
+      let categories = ''
+      game.categories.forEach(category => {
+        categories += `${category.name}, `
+      })
+      categories = categories.replace(/,\s*$/, "")
       return(
         <li>
         <GameTile
           id={game.id}
           key={game.id}
           name={game.name}
+          categories = {categories}
           description={shortDescription}
         />
         </li>
