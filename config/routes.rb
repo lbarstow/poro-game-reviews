@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   root 'games#index'
   devise_for :users
-  resources :games, only: [:index]
+  resources :games, only: [:index, :create, :new]
   namespace :api do
     namespace :v1 do
       resources :games, only: [:index] do
         resources :reviews, only: [:index]
       end
+      resources :games, only: [:create]
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

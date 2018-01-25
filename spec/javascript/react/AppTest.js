@@ -8,7 +8,5 @@ describe('Home page should have content', () => {
     )
   })
 
-  it('should have an h1 tag', () => {
-    expect(wrapper.find('h1').length).toEqual(1)
-  })
+  
 })

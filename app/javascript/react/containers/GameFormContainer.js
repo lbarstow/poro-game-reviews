@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router'
 
 class GameFormContainer extends Component {
   constructor(props) {
@@ -60,11 +61,6 @@ class GameFormContainer extends Component {
         throw(error);
       }
     })
-    .then(response => response.json())
-    .then(body => {
-      this.setState({ fortune: body.fortune.text,
-      newFortune: '' });
-    })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
     //put some kind of router call here if submit worked?
   }
@@ -72,27 +68,27 @@ class GameFormContainer extends Component {
   render() {
     return(
       <div>
-      <h2>New Game Form</h2>
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Game Name:
-          <input type="text"  value={this.state.title} onChange={this.handleTitleChange} />
-        </label>
-        <label>
-          Description:
-          < textarea value={this.state.description} onChange={this.handleDescriptionChange} />
-        </label>
-        <label>Number of Players:
-         < input type="number" value={this.state.minPlayers} onChange={this.handleMinPlayerChange}/>
-        </label>
-        <label>
-          to
-          < input type="number" value={this.state.maxPlayers} onChange={this.handleMaxPlayerChange}/>
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-      //would a cancel button just be the same as a back button?
-      //hi guess JSX comments are great
+        <h2>New Game Form</h2>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Game Name:
+            <input type="text"  value={this.state.title} onChange={this.handleTitleChange} />
+          </label>
+          <label>
+            Description:
+            < textarea value={this.state.description} onChange={this.handleDescriptionChange} />
+          </label>
+          <label>
+            Number of Players:
+           < input type="number" value={this.state.minPlayers} onChange={this.handleMinPlayerChange}/>
+          </label>
+          <label>
+            to
+            < input type="number" value={this.state.maxPlayers} onChange={this.handleMaxPlayerChange}/>
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+        <Link to="/games"><button type="button">Cancel</button></Link>
       </div>
     )
   }
