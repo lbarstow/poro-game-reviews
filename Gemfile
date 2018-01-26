@@ -31,7 +31,8 @@ gem 'jquery-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'fog-aws'
+gem 'fog'
+gem 'carrierwave'
 
 group :development, :test do
   gem "dotenv-rails"
