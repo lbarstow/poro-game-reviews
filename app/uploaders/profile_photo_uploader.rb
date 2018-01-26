@@ -4,4 +4,10 @@ class ProfilePhotoUploader < CarrierWave::Uploader::Base
   else
     storage :fog
   end
+
+# to be checked later:
+  def store_dir
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  end
+
 end
