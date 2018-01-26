@@ -10,7 +10,7 @@ const GameTile = (props) => {
         <h6 className = "categories">{props.categories}</h6>
         <hr/>
         <p>{props.description}</p>
-        <Link to={"games/"+props.id} className="button view-game small-12 small-centered columns">View Game</Link>
+        <Link to={"/games/"+props.id} className="button view-game small-12 small-centered columns">View Game</Link>
     </div>
   )
 }
