@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::CategoriesController, type: :controller do
-  let!(:first_game) { Game.create!(name: "Arkham Horror", min_player_count: 1, max_player_count: 8, description: "Horror game where you can punch Cthulhu in the face") }
+  let!(:user_one) { User.create!(email: "none@none.com", password: "foobar", username: 'user_one', sign_in_count: 1) }
+  let!(:first_game) { Game.create!(name: "Arkham Horror", user: user_one, min_player_count: 1, max_player_count: 8, description: "Horror game where you can punch Cthulhu in the face") }
   let!(:first_category) { Category.create!(name: "Card") }
   let!(:second_category) { Category.create!(name: "Cooperative") }
   let!(:third_category) { Category.create!(name: "Dice") }
