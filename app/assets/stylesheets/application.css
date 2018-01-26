@@ -54,3 +54,7 @@ h4.game-name {
   color: green;
   font-size: 60px;
 }
+
+span.right {
+  float: right;
+}

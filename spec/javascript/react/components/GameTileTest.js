@@ -2,6 +2,7 @@ import GameTile from '../../../../app/javascript/react/components/GameTile.js'
 
 describe('GameTile', () => {
   let wrapper;
+
   beforeEach(() => {
     wrapper = mount(
       <GameTile
@@ -13,11 +14,11 @@ describe('GameTile', () => {
   })
 
 
-  it('should have an h5 tag', () => {
+  it('should have an h4 tag', () => {
     expect(wrapper.find('h4').length).toEqual(1)
   })
 
-  it('should have expected content in h5 tag', () => {
+  it('should have expected content in h4 tag', () => {
     expect(wrapper.find('h4').text()).toBe('Catan')
   })
 

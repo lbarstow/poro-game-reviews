@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import GameShowTile from '../components/GameShowTile';
+import ReviewTile from '../components/ReviewTile';
 import { Link } from 'react-router'
 
 class GameShowContainer extends Component {
@@ -10,7 +11,8 @@ class GameShowContainer extends Component {
       description: '',
       categories: [],
       min_players: null,
-      max_players: null
+      max_players: null,
+      reviews: []
     }
   }
   componentDidMount() {
@@ -31,7 +33,8 @@ class GameShowContainer extends Component {
         description: body.description,
         categories: body.categories,
         min_players: body.min_player_count,
-        max_players: body.max_player_count
+        max_players: body.max_player_count,
+        reviews: body.reviews
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -43,16 +46,34 @@ class GameShowContainer extends Component {
       categories += `${category.name}, `
     })
     categories = categories.replace(/,\s*$/, "")
-    return(
-      <div className = "row">
-        <GameShowTile
-          name= {this.state.name}
-          description= {this.state.description}
-          categories= {categories}
-          min_players= {this.state.min_players}
-          max_players= {this.state.max_players}
+    let reviews = this.state.reviews.map( review => {
+      return(
+        <ReviewTile
+          key={review.id}
+          rating={review.rating}
+          body={review.body}
+          victory_points={review.victory_points}
         />
-        <Link to="/games" className = "button">Back to all games</Link>
+      )
+    })
+    return(
+      <div>
+        <div className= "row">
+          <GameShowTile
+            name={this.state.name}
+            description={this.state.description}
+            categories={categories}
+            min_players={this.state.min_players}
+            max_players={this.state.max_players}
+          />
+        </div>
+        <div className= "row">
+          <Link to="/games" className = "button small-3 small-offset-1 columns">Add new review</Link>
+          <Link to="/games" className = "button small-3 small-offset-3 columns end">Back to all games</Link>
+        </div>
+        <div className= "row">
+          {reviews}
+        </div>
       </div>
     )
   }
