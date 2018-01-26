@@ -8,8 +8,12 @@ class Api::V1::GamesController < ApplicationController
 
       render json: category_games
     else
-      render json: Game.all, include: [:categories]
+      render json: Game.all, include: [:reviews, :categories]
     end
+  end
+
+  def show
+    render json: Game.find(params[:id]), include: [:reviews, :categories]
   end
 
   def create
@@ -20,7 +24,8 @@ class Api::V1::GamesController < ApplicationController
       puts game.errors.full_messages
       render json: {error: game.errors.full_messages}, status: :unprocessable_entity
     end
-  end  
+  end
+
   private
 
   def game_params

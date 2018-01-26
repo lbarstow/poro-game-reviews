@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   root 'games#index'
   devise_for :users
-  resources :games, only: [:index, :create, :new]
+  resources :games, only: [:index, :show, :create, :new]
   namespace :api do
     namespace :v1 do
-      resources :games, only: [:index] do
+      resources :games, only: [:index, :show] do
         resources :reviews, only: [:index]
         resources :categories, only: [:index]
       end

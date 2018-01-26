@@ -77,13 +77,13 @@ class GamesIndexContainer extends Component {
       if (categories.includes(this.state.category) || this.state.category ===null) {
         return(
           <li>
-          <GameTile
-            id={game.id}
-            key={game.id}
-            name={game.name}
-            categories = {categories}
-            description={shortDescription}
-          />
+            <GameTile
+              id={game.id}
+              key={game.id}
+              name={game.name}
+              categories = {categories}
+              description={shortDescription}
+            />
           </li>
         )
       }

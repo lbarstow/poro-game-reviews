@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router';
 
 const GameTile = (props) => {
 
@@ -9,7 +10,7 @@ const GameTile = (props) => {
         <h6 className = "categories">{props.categories}</h6>
         <hr/>
         <p>{props.description}</p>
-        <a href='#' className="button view-game small-12 small-centered columns"> View Game </a>
+        <Link to={"/games/"+props.id} className="button view-game small-12 small-centered columns">View Game</Link>
     </div>
   )
 }
