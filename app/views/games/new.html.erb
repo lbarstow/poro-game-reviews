@@ -1,0 +1,41 @@
+<h2>New Game Form</h2>
+<%= form_for @game do |f| %>
+  <div class="field">
+    <%= f.label :name, "Game Name:" %><br />
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :min_player_count %><br />
+    <%= f.number_field :min_player_count %>
+  </div>
+
+  <div class="field">
+    <%= f.label :max_player_count %><br />
+    <%= f.number_field :max_player_count %>
+  </div>
+
+  <!-- <div class="row"> -->
+    <!-- <label for="game_category_ids">Categories</label>
+      <%# @categories.each do |category| %>
+        <input type="checkbox" value="<%=category.id%>" name="<%@game[category_ids][]%>"></input>
+      <%end%>
+    <input type="hidden" name="game[category_ids][]" value=""> -->
+
+  <!-- </div>
+  <%= f.fields_for :categories, @categories do |category_fields| %>
+    <%= f.check_box :category %>
+  <% end %> -->
+
+  <div class="field">
+    <%= f.label :description, "Description:" %><br />
+    <%= f.text_area :description %>
+  </div>
+
+  <%= f.submit "Submit New Game" %>
+
+<% end %>
+
+
+
+<%= link_to 'Back', games_path %>

@@ -7,8 +7,8 @@ class GameFormContainer extends Component {
     this.state = {
       title: "",
       description: "",
-      minPlayers: 1,
-      maxPlayers: 1
+      minPlayers: null,
+      maxPlayers: null
     }
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
@@ -76,11 +76,11 @@ class GameFormContainer extends Component {
           </label>
           <label>
             Number of Players:
-           < input type="number" value={this.state.minPlayers} onChange={this.handleMinPlayerChange}/>
+           < input type="number" value={this.state.minPlayers} placeholder="Min" onChange={this.handleMinPlayerChange}/>
           </label>
           <label>
             to
-            < input type="number" value={this.state.maxPlayers} onChange={this.handleMaxPlayerChange}/>
+            < input type="number" value={this.state.maxPlayers} placeholder="Max" onChange={this.handleMaxPlayerChange}/>
           </label>
           <input type="submit" value="Submit" />
         </form>
