@@ -49,3 +49,8 @@ h4.game-name {
   font-weight: 500;
   color: darkgrey;
 }
+
+.fa-plus {
+  color: green;
+  font-size: 60px;
+}

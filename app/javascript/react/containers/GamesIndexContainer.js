@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import GameTile from "../components/GameTile";
-import CategoryButton from "../components/CategoryButton";
-
+import GameFormTile from "../components/GameFormTile";
+import CategoryButton from "../components/CategoryButton"
 
 class GamesIndexContainer extends Component {
   constructor(props) {
@@ -99,6 +99,7 @@ class GamesIndexContainer extends Component {
 
           <ul className= "small-block-grid-3">
             {gameTiles}
+            <li> <GameFormTile/> </li>
           </ul>
           <div className = "pagination-centered">
             <ul className="pagination">
