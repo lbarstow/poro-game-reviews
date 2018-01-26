@@ -31,8 +31,10 @@ gem 'jquery-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-group :development, :test do
+gem 'fog-aws'
 
+group :development, :test do
+  gem "dotenv-rails"
 end
 
 group :development do
