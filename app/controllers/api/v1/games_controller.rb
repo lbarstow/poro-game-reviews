@@ -18,8 +18,10 @@ class Api::V1::GamesController < ApplicationController
 
   def create
     game = Game.new(game_params)
+    game.categories = Category.where(id: params[:categories])
+
     if game.save
-      render json: { game: game}
+      render json: { game: game}, include: [:categories]
     else
       puts game.errors.full_messages
       render json: {error: game.errors.full_messages}, status: :unprocessable_entity
@@ -29,6 +31,6 @@ class Api::V1::GamesController < ApplicationController
   private
 
   def game_params
-    params.require(:game).permit(:name, :description, :min_player_count, :max_player_count)
+    params.require(:game).permit(:name, :description, :categories, :min_player_count, :max_player_count, :user_id)
   end
 end

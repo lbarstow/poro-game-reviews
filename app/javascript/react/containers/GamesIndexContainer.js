@@ -57,6 +57,7 @@ class GamesIndexContainer extends Component {
   }
 
   render() {
+    console.log(this.props.route.currentUserId)
     let categoryButtons = this.state.categories.map( category => {
 
       return(
@@ -89,6 +90,7 @@ class GamesIndexContainer extends Component {
       }
     })
     return(
+
         <div className = "row games-container">
           <h1 className = "main-title small-8 small-centered columns">Poro Game Reviews</h1>
           <hr/>
