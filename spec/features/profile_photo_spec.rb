@@ -5,7 +5,7 @@ feature "profile photo" do
     visit root_path
     click_link "Sign Up"
 
-    fill_in "Username", with: "Poro King"                                                                                                                                 
+    fill_in "Username", with: "Poro King"
     fill_in "Email", with: "ash@s-mart.com"
     fill_in "Password", with: "boomstick!3vilisd3ad"
     fill_in "Password confirmation", with: "boomstick!3vilisd3ad"
@@ -13,6 +13,6 @@ feature "profile photo" do
     click_button "Sign up"
 
     expect(page).to have_content("Welcome! You have signed up successfully.")
-    expect(page).to have_css("img[src*='photo.jpeg']")
+    expect(page).to have_css("img[src*='thumb_photo.jpeg']")
   end
 end
