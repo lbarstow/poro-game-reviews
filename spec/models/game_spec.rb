@@ -53,10 +53,10 @@ RSpec.describe Game, type: :model do
     expect(game_2.errors[:min_player_count]).to_not be_blank
   end
 
-  it "is not valid when max player count is 1 or less" do
+  it "is not valid when max player count is 0 or less" do
     user = User.new()
     game_1 = Game.new(name: "Lords of Waterdeep", user: user, max_player_count: (-1), description: "This is a game based on the Dungeons & Dragons universe.")
-    game_2 = Game.new(name: "Settlers of Catan", user: user, max_player_count: 1, description: "This is a chance-based resource collection and trading game")
+    game_2 = Game.new(name: "Settlers of Catan", user: user, max_player_count: 0, description: "This is a chance-based resource collection and trading game")
 
     expect(game_1).to_not be_valid
     expect(game_1.errors[:max_player_count]).to_not be_blank
