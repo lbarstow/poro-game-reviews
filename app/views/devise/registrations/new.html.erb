@@ -5,7 +5,7 @@
 
   <div class = "field">
     <%= f.label :username %> <br />
-    <%= f.text_field :username, autofocus:true %>
+    <%= f.text_field :username, autofocus: true %>
   </div>
 
   <div class="field">
@@ -24,6 +24,11 @@
   <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :profile_photo %><br />
+    <%= f.file_field :profile_photo %>
   </div>
 
   <div class="actions">
