@@ -9,10 +9,10 @@ const App = (props) => {
   return (
     <Router history={browserHistory}>
       <Route path='/' >
-        <IndexRoute component={GamesIndexContainer} />
-        <Route path='/games' component={GamesIndexContainer} />
-        <Route path='games/new' component={GameFormContainer} />
-        <Route path='games/:id' component={GameShowContainer} />
+      <IndexRoute component={(props) => <GamesIndexContainer currentUserId={JSON.parse(document.getElementById('app').dataset.currentUser).id} {...props} />} />
+        <Route path='/games' component={(props) => <GamesIndexContainer currentUserId={JSON.parse(document.getElementById('app').dataset.currentUser).id} {...props} />}  />
+        <Route path='games/new' component={(props) => <GameFormContainer currentUserId={JSON.parse(document.getElementById('app').dataset.currentUser).id} {...props} />}  />
+        <Route path='games/:id' component={(props) => <GameShowContainer currentUserId={JSON.parse(document.getElementById('app').dataset.currentUser).id} {...props} />} />
       </Route>
     </Router>
   )

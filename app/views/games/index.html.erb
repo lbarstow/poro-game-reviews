@@ -1,6 +1,6 @@
-<% if !@current_user %>
+<!-- <% if !@current_user %>
 <% @current_user = User.new(username: 'guest', email: 'guest@poro.com', password: 'guest', sign_in_count: 0) %>
-<% end %>
+<% end %> -->
 <div id="app" data-current-user="<%=@current_user.to_json%>">
 
 </div>

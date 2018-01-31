@@ -57,11 +57,11 @@ class GamesIndexContainer extends Component {
   }
 
   render() {
-    console.log(this.props.route.currentUserId)
     let categoryButtons = this.state.categories.map( category => {
 
       return(
         <CategoryButton
+          key={category.id}
           name = {category.name}
           handleClick = {this.handleCategoryClick}
         />
@@ -101,7 +101,7 @@ class GamesIndexContainer extends Component {
 
           <ul className= "small-block-grid-3">
             {gameTiles}
-            <li> <GameFormTile/> </li>
+            <li> <GameFormTile/></li>
           </ul>
           <div className = "pagination-centered">
             <ul className="pagination">
