@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import GameTile from "../components/GameTile";
 import GameFormTile from "../components/GameFormTile";
 import CategoryButton from "../components/CategoryButton"
+import PageNumberButton from "../components/PageNumberButton"
 
 class GamesIndexContainer extends Component {
   constructor(props) {
@@ -9,9 +10,13 @@ class GamesIndexContainer extends Component {
     this.state = {
       games: [],
       categories: [],
-      category: null
+      category: null,
+      pageCount: null,
+      pageNum: 1
     };
     this.handleCategoryClick = this.handleCategoryClick.bind(this);
+    this.handlePageClick = this.handlePageClick.bind(this);
+    this.fetchGamesByPage = this.fetchGamesByPage.bind(this)
   }
 
   handleCategoryClick(event) {
@@ -23,8 +28,30 @@ class GamesIndexContainer extends Component {
     }
   }
 
-  componentDidMount() {
-    fetch('/api/v1/games.json')
+  handlePageClick(event) {
+    event.preventDefault()
+    let text = event.target.text
+    if (text !== this.state.pageNum && !isNaN(parseInt(text))) {
+      this.setState({ pageNum: text })
+    } else if (text === '<<') {
+      this.setState({ pageNum: 1 })
+      text = 1
+    } else if (text === '>>') {
+      this.setState({ pageNum: this.state.pageCount })
+      text = this.state.pageCount
+    } else if (text === '<') {
+      this.setState({ pageNum: this.state.pageNum - 1 })
+      text = this.state.pageNum - 1
+    } else if (text === '>') {
+      this.setState({ pageNum: this.state.pageNum + 1 })
+      text = this.state.pageNum + 1
+    }
+
+    this.fetchGamesByPage(text)
+  }
+
+  fetchGamesByPage(page) {
+    fetch(`/api/v1/games?page=${page - 1}`)
       .then(response => {
         if (response.ok) {
           return response;
@@ -36,9 +63,14 @@ class GamesIndexContainer extends Component {
       })
       .then(response => response.json())
       .then(body => {
-        this.setState({ games: body })
+        this.setState({ games: body.games, pageCount: body.pages })
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
+
+  componentDidMount() {
+    this.fetchGamesByPage(this.state.pageNum)
     fetch('/api/v1/categories.json')
       .then(response => {
         if (response.ok) {
@@ -89,6 +121,44 @@ class GamesIndexContainer extends Component {
         )
       }
     })
+
+    let pageTiles = []
+    if (this.state.pageNum != 1) {
+      pageTiles.push(
+        <PageNumberButton
+          className="arrow "
+          pageNum="<<"
+          handleClick={this.handlePageClick}
+        />)
+      pageTiles.push(
+        <PageNumberButton
+          className="arrow "
+          pageNum="<"
+          handleClick={this.handlePageClick}
+        />)
+    }
+    for (let i = 0; i < this.state.pageCount; i++){
+      pageTiles.push(
+        <PageNumberButton
+          className=""
+          pageNum={i+1}
+          handleClick={this.handlePageClick}
+        />)
+    }
+    if (this.state.pageNum != this.state.pageCount) {
+      pageTiles.push(
+        <PageNumberButton
+          className="arrow "
+          pageNum=">"
+          handleClick={this.handlePageClick}
+        />)
+      pageTiles.push(
+        <PageNumberButton
+          className="arrow "
+          pageNum=">>"
+          handleClick={this.handlePageClick}
+        />)
+    }
     return(
 
         <div className = "row games-container">
@@ -105,15 +175,7 @@ class GamesIndexContainer extends Component {
           </ul>
           <div className = "pagination-centered">
             <ul className="pagination">
-            <li className="arrow unavailable"><a href="">&laquo;</a></li>
-            <li className="current"><a href="">1</a></li>
-            <li><a href="">2</a></li>
-            <li><a href="">3</a></li>
-            <li><a href="">4</a></li>
-            <li className="unavailable"><a href="">&hellip;</a></li>
-            <li><a href="">12</a></li>
-            <li><a href="">13</a></li>
-            <li className="arrow"><a href="">&raquo;</a></li>
+             {pageTiles}
             </ul>
           </div>
 
