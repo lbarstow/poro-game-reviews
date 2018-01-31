@@ -61,6 +61,7 @@ class GamesIndexContainer extends Component {
 
       return(
         <CategoryButton
+          key={category.id}
           name = {category.name}
           handleClick = {this.handleCategoryClick}
         />
@@ -89,6 +90,7 @@ class GamesIndexContainer extends Component {
       }
     })
     return(
+
         <div className = "row games-container">
           <h1 className = "main-title small-8 small-centered columns">Poro Game Reviews</h1>
           <hr/>
@@ -99,7 +101,7 @@ class GamesIndexContainer extends Component {
 
           <ul className= "small-block-grid-3">
             {gameTiles}
-            <li> <GameFormTile/> </li>
+            <li> <GameFormTile/></li>
           </ul>
           <div className = "pagination-centered">
             <ul className="pagination">
