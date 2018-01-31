@@ -68,7 +68,7 @@ class GameShowContainer extends Component {
           />
         </div>
         <div className= "row">
-          <Link to="/games" className = "button small-3 small-offset-1 columns">Add new review</Link>
+          <Link to={this.props.location.pathname+"/reviews/new"} className = "button small-3 small-offset-1 columns">Add new review</Link>
           <Link to="/games" className = "button small-3 small-offset-3 columns end">Back to all games</Link>
         </div>
         <div className= "row">
