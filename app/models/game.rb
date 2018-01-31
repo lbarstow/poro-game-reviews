@@ -10,4 +10,5 @@ class Game < ApplicationRecord
   has_many :reviews
   has_many :game_categorizations
   has_many :categories, through: :game_categorizations
+  belongs_to :user
 end

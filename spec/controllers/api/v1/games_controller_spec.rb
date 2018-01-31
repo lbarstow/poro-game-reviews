@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::GamesController, type: :controller do
-  let!(:first_game) { Game.create!(name: "Arkham Horror", min_player_count: 1, max_player_count: 8, description: "Horror game where you can punch Cthulhu in the face") }
-  let!(:second_game) { Game.create!(name: "Dominion", min_player_count: 1, max_player_count: 4, description: "Deck building game with action, buy, and clean-up phases") }
-  let!(:third_game) { Game.create!(name: "Secret Hitler", min_player_count: 4, max_player_count: 10, description: "You gotta find and kill Hitler or you lose! Liberals stink!") }
+  let!(:user_one) { User.create!(email: "none@none.com", password: "foobar", username: 'user_one', sign_in_count: 1) }
+  let!(:first_game) { Game.create!(name: "Arkham Horror", user: user_one, min_player_count: 1, max_player_count: 8, description: "Horror game where you can punch Cthulhu in the face") }
+  let!(:second_game) { Game.create!(name: "Dominion", user: user_one, min_player_count: 1, max_player_count: 4, description: "Deck building game with action, buy, and clean-up phases") }
+  let!(:third_game) { Game.create!(name: "Secret Hitler", user: user_one, min_player_count: 4, max_player_count: 10, description: "You gotta find and kill Hitler or you lose! Liberals stink!") }
   let!(:first_category) { Category.create!(name: "Card") }
   let!(:first_categorization) { GameCategorization.create!(game: first_game, category: first_category)}
   let!(:second_categorization) { GameCategorization.create!(game: second_game, category: first_category)}
