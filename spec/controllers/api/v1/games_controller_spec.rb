@@ -17,16 +17,16 @@ RSpec.describe Api::V1::GamesController, type: :controller do
       expect(response.status).to eq 200
       expect(response.content_type).to eq("application/json")
 
-      expect(returned_json.length).to eq 3
-      expect(returned_json[0]["name"]).to eq "Arkham Horror"
-      expect(returned_json[0]["min_player_count"]).to eq 1
-      expect(returned_json[0]["max_player_count"]).to eq 8
-      expect(returned_json[0]["description"]).to eq "Horror game where you can punch Cthulhu in the face"
+      expect(returned_json.length).to eq 2
+      expect(returned_json["games"][0]["name"]).to eq "Arkham Horror"
+      expect(returned_json['games'][0]["min_player_count"]).to eq 1
+      expect(returned_json['games'][0]["max_player_count"]).to eq 8
+      expect(returned_json['games'][0]["description"]).to eq "Horror game where you can punch Cthulhu in the face"
 
-      expect(returned_json[2]["name"]).to eq "Secret Hitler"
-      expect(returned_json[2]["min_player_count"]).to eq 4
-      expect(returned_json[2]["max_player_count"]).to eq 10
-      expect(returned_json[2]["description"]).to eq "You gotta find and kill Hitler or you lose! Liberals stink!"
+      expect(returned_json['games'][2]["name"]).to eq "Secret Hitler"
+      expect(returned_json['games'][2]["min_player_count"]).to eq 4
+      expect(returned_json['games'][2]["max_player_count"]).to eq 10
+      expect(returned_json['games'][2]["description"]).to eq "You gotta find and kill Hitler or you lose! Liberals stink!"
     end
 
     it "should return a list of games by category if category_id exists" do
@@ -37,15 +37,15 @@ RSpec.describe Api::V1::GamesController, type: :controller do
       expect(response.content_type).to eq("application/json")
 
       expect(returned_json.length).to eq 2
-      expect(returned_json[0]["name"]).to eq "Arkham Horror"
-      expect(returned_json[0]["min_player_count"]).to eq 1
-      expect(returned_json[0]["max_player_count"]).to eq 8
-      expect(returned_json[0]["description"]).to eq "Horror game where you can punch Cthulhu in the face"
+      expect(returned_json['games'][0]["name"]).to eq "Arkham Horror"
+      expect(returned_json['games'][0]["min_player_count"]).to eq 1
+      expect(returned_json['games'][0]["max_player_count"]).to eq 8
+      expect(returned_json['games'][0]["description"]).to eq "Horror game where you can punch Cthulhu in the face"
 
-      expect(returned_json[1]["name"]).to eq "Dominion"
-      expect(returned_json[1]["min_player_count"]).to eq 1
-      expect(returned_json[1]["max_player_count"]).to eq 4
-      expect(returned_json[1]["description"]).to eq "Deck building game with action, buy, and clean-up phases"
+      expect(returned_json['games'][1]["name"]).to eq "Dominion"
+      expect(returned_json['games'][1]["min_player_count"]).to eq 1
+      expect(returned_json['games'][1]["max_player_count"]).to eq 4
+      expect(returned_json['games'][1]["description"]).to eq "Deck building game with action, buy, and clean-up phases"
     end
   end
 end

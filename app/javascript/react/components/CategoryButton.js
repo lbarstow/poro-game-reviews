@@ -2,7 +2,7 @@ import React from 'react'
 
 const CategoryButton = (props) => {
   return(
-    <li><a href="#" className="button tiny" onClick = {props.handleClick}>{props.name}</a></li>
+    <li><a href="#" className="button tiny" id={props.id} onClick = {props.handleClick}>{props.name}</a></li>
   )
 }
 
