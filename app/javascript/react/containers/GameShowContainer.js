@@ -17,14 +17,148 @@ class GameShowContainer extends Component {
     this.handleUpVoteClick = this.handleUpVoteClick.bind(this)
     this.handleDownVoteClick = this.handleDownVoteClick.bind(this)
   }
-  handleUpVoteClick(event){
-    console.log(event.target)
 
+  handleUpVoteClick(review_id, val){
+    if(this.props.currentUserId != null) {
+      if(val == 1) {
+        fetch(`/api/v1/${this.props.location.pathname}?user_id=${this.props.currentUserId}&review_id=${review_id}&val=${-1}&update=destroy`)
+        .then(response => {
+          if (response.ok) {
+            return response;
+          } else {
+            let errorMessage = `${response.status} (${response.statusText})`,
+                error = new Error(errorMessage);
+            throw(error);
+          }
+        })
+        .then(response => response.json())
+        .then(body => {
+          this.setState({
+            name: body.game.name,
+            description: body.game.description,
+            categories: body.game.categories,
+            min_players: body.game.min_player_count,
+            max_players: body.game.max_player_count,
+            reviews: body.reviews
+          })
+        })
+      } else if (val == 0) {
+        fetch(`/api/v1/${this.props.location.pathname}?user_id=${this.props.currentUserId}&review_id=${review_id}&val=${1}&update=create`)
+        .then(response => {
+          if (response.ok) {
+            return response;
+          } else {
+            let errorMessage = `${response.status} (${response.statusText})`,
+                error = new Error(errorMessage);
+            throw(error);
+          }
+        })
+        .then(response => response.json())
+        .then(body => {
+          this.setState({
+            name: body.game.name,
+            description: body.game.description,
+            categories: body.game.categories,
+            min_players: body.game.min_player_count,
+            max_players: body.game.max_player_count,
+            reviews: body.reviews
+          })
+        })
+      } else {
+        fetch(`/api/v1/${this.props.location.pathname}?user_id=${this.props.currentUserId}&review_id=${review_id}&val=${1}&update=update`)
+        .then(response => {
+          if (response.ok) {
+            return response;
+          } else {
+            let errorMessage = `${response.status} (${response.statusText})`,
+                error = new Error(errorMessage);
+            throw(error);
+          }
+        })
+        .then(response => response.json())
+        .then(body => {
+          this.setState({
+            name: body.game.name,
+            description: body.game.description,
+            categories: body.game.categories,
+            min_players: body.game.min_player_count,
+            max_players: body.game.max_player_count,
+            reviews: body.reviews
+          })
+        })
+      }
+    }
   }
-  handleDownVoteClick(event){
-    debugger
-    console.log("down")
-
+  handleDownVoteClick(review_id, val){
+    if(this.props.currentUserId != null) {
+      if(val == 1) {
+        fetch(`/api/v1/${this.props.location.pathname}?user_id=${this.props.currentUserId}&review_id=${review_id}&val=${-1}&update=update`)
+        .then(response => {
+          if (response.ok) {
+            return response;
+          } else {
+            let errorMessage = `${response.status} (${response.statusText})`,
+                error = new Error(errorMessage);
+            throw(error);
+          }
+        })
+        .then(response => response.json())
+        .then(body => {
+          this.setState({
+            name: body.game.name,
+            description: body.game.description,
+            categories: body.game.categories,
+            min_players: body.game.min_player_count,
+            max_players: body.game.max_player_count,
+            reviews: body.reviews
+          })
+        })
+      } else if (val == 0) {
+        fetch(`/api/v1/${this.props.location.pathname}?user_id=${this.props.currentUserId}&review_id=${review_id}&val=${-1}&update=create`)
+        .then(response => {
+          if (response.ok) {
+            return response;
+          } else {
+            let errorMessage = `${response.status} (${response.statusText})`,
+                error = new Error(errorMessage);
+            throw(error);
+          }
+        })
+        .then(response => response.json())
+        .then(body => {
+          this.setState({
+            name: body.game.name,
+            description: body.game.description,
+            categories: body.game.categories,
+            min_players: body.game.min_player_count,
+            max_players: body.game.max_player_count,
+            reviews: body.reviews
+          })
+        })
+      } else {
+        fetch(`/api/v1/${this.props.location.pathname}?user_id=${this.props.currentUserId}&review_id=${review_id}&val=${1}&update=destroy`)
+        .then(response => {
+          if (response.ok) {
+            return response;
+          } else {
+            let errorMessage = `${response.status} (${response.statusText})`,
+                error = new Error(errorMessage);
+            throw(error);
+          }
+        })
+        .then(response => response.json())
+        .then(body => {
+          this.setState({
+            name: body.game.name,
+            description: body.game.description,
+            categories: body.game.categories,
+            min_players: body.game.min_player_count,
+            max_players: body.game.max_player_count,
+            reviews: body.reviews
+          })
+        })
+      }
+    }
   }
   componentDidMount() {
     fetch(`/api/v1/${this.props.location.pathname}?user_id=${this.props.currentUserId}`)
@@ -74,6 +208,7 @@ class GameShowContainer extends Component {
 
       return(
         <ReviewTile
+          id = {review.id}
           key={review.id}
           rating={review.rating}
           body={review.body}

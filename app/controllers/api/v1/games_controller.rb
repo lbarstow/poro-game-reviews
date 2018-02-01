@@ -29,19 +29,41 @@ class Api::V1::GamesController < ApplicationController
 
   def show
     game = Game.find(params[:id])
-    review_hash = game.reviews.as_json.map do |x|
+
+
+    if !params[:review_id].nil?
+      review = Review.find(params[:review_id])
+
+      if params[:update] == "destroy"
+        Vote.find_by(user_id: params[:user_id], review_id: params[:review_id]).destroy!
+        new_victory_points = review.victory_points + params[:val].to_i
+
+      elsif params[:update] == "update"
+        Vote.find_by(user_id: params[:user_id], review_id: params[:review_id]).update!(value: params[:val])
+        new_victory_points = review.victory_points + (2 * params[:val].to_i)
+
+      else
+        Vote.create!(value: params[:val], user_id: params[:user_id], review_id: params[:review_id])
+        new_victory_points = review.victory_points + params[:val].to_i
+
+      end
+      review.update!(victory_points: new_victory_points)
+
+    end
+
+    ordered_reviews = game.reviews.order!(:id)
+
+    review_hash = ordered_reviews.as_json.map do |x|
       if !params[:user_id].nil?
-        #x.merge!("user_vote"=>Vote.where(user_id: params[:user_id], review_id: x["id"]))
         x.merge!("user_vote" =>Vote.find_by(user_id: params[:user_id], review_id: x["id"]))
       else
         x.merge!("user_vote"=>nil)
       end
       x.merge!("username"=>User.find(x["user_id"]).username)
-      #x.merge!("user_vote" =>Vote.find_by(user_id: 2, review_id: x["id"]))
     end
 
-    #render json: { game: game, reviews: review_hash }, include: [:categories]
     render json: {game: game.as_json(include:[:categories]), reviews: review_hash}
+
   end
 
   def create
