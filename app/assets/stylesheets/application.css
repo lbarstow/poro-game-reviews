@@ -21,6 +21,8 @@ body {
 
 .panel {
   padding: 20px;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
 }
 
 .games-container {
@@ -42,6 +44,14 @@ h4.game-name {
   background-color: #fd8627;
   color: black;
   border: 2px outset darkgrey;
+
+}
+
+.new-game {
+  background-color: #1F9E35;
+  color: black;
+  border: 2px outset darkgrey;
+
 }
 
 .categories {
@@ -51,15 +61,18 @@ h4.game-name {
 }
 
 .fa-plus {
-  color: green;
-  font-size: 60px;
+  color: #1F9E35;
+  font-size: 120px;
+  text-align: center;
+  text-shadow: 3px 3px #202020;
+
 }
 
 span.right {
   float: right;
 }
 
-.search-button {
-  height: 40px;
-  width: 100px;
+.index-tile{
+  min-height: 320px;
+  border: 1px solid #333333
 }

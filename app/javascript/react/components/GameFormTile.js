@@ -3,9 +3,12 @@ import { Link } from 'react-router';
 
 const GameFormTile = (props) => {
   return(
-      <div className = "panel" >
-        <Link to="/games/new"><i className="fa fa-plus"> </i></Link>
-        <Link to="/games/new"><h5>Add New Game</h5></Link>
+      <div className = "panel index-tile" >
+      <br/>
+      <Link to="/games/new"><i className="fa fa-plus small-12 small-centered columns"> </i></Link>
+      <br/>
+      <hr/>
+        <Link to="/games/new"><h5 className="button new-game small-12 small-centered columns">Add New Game</h5></Link>
       </div>
   )
 }
