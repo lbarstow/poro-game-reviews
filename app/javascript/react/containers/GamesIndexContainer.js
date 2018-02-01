@@ -20,44 +20,48 @@ class GamesIndexContainer extends Component {
   }
 
   handleCategoryClick(event) {
-    if (this.state.category === event.target.text) {
-      this.setState({ category: null })
+    let category = event.target.id
+    let page = 1
+    if (this.state.category === category) {
+      category = null;
+      this.setState({ category: null, pageNum: page })
     } else {
-      let value = event.target.text
-      this.setState({ category: value })
+      this.setState({ category: category, pageNum: page })
     }
+    this.fetchGamesByPage(page, category)
   }
 
   handlePageClick(event) {
     event.preventDefault()
     let text = event.target.text
-    if (text !== this.state.pageNum && !isNaN(parseInt(text))) {
+    if (text != parseInt(this.state.pageNum) && !isNaN(parseInt(text))) {
       this.setState({ pageNum: text })
     } else if (text === '<<') {
       this.setState({ pageNum: 1 })
       text = 1
     } else if (text === '>>') {
       this.setState({ pageNum: this.state.pageCount })
-      text = this.state.pageCount
+      text = parseInt(this.state.pageCount)
     } else if (text === '<') {
-      this.setState({ pageNum: this.state.pageNum - 1 })
-      text = this.state.pageNum - 1
+      text = parseInt(this.state.pageNum) - 1
+      this.setState({ pageNum: parseInt(this.state.pageNum) - 1 })
     } else if (text === '>') {
-      this.setState({ pageNum: this.state.pageNum + 1 })
-      text = this.state.pageNum + 1
+      text = parseInt(this.state.pageNum) + 1
+      this.setState({ pageNum: parseInt(this.state.pageNum) + 1 })
     }
 
-    this.fetchGamesByPage(text)
+    this.fetchGamesByPage(text, this.state.category)
   }
 
-  fetchGamesByPage(page) {
+  fetchGamesByPage(page, category) {
+    if (category == null) {
     fetch(`/api/v1/games?page=${page - 1}`)
       .then(response => {
         if (response.ok) {
           return response;
         } else {
           let errorMessage = `${response.status} (${response.statusText})`,
-              error = new Error(errorMessage);
+            error = new Error(errorMessage);
           throw(error);
         }
       })
@@ -66,11 +70,28 @@ class GamesIndexContainer extends Component {
         this.setState({ games: body.games, pageCount: body.pages })
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
+    } else {
+      fetch(`/api/v1/categories/${category}/games?page=${page - 1}`)
+        .then(response => {
+          if (response.ok) {
+            return response;
+          } else {
+            let errorMessage = `${response.status} (${response.statusText})`,
+              error = new Error(errorMessage);
+            throw(error);
+          }
+        })
+        .then(response => response.json())
+        .then(body => {
+          this.setState({ games: body.games, pageCount: body.pages })
+        })
+        .catch(error => console.error(`Error in fetch: ${error.message}`));
+    }
   }
 
 
   componentDidMount() {
-    this.fetchGamesByPage(this.state.pageNum)
+    this.fetchGamesByPage(1)
     fetch('/api/v1/categories.json')
       .then(response => {
         if (response.ok) {
@@ -94,6 +115,7 @@ class GamesIndexContainer extends Component {
       return(
         <CategoryButton
           key={category.id}
+          id={category.id}
           name = {category.name}
           handleClick = {this.handleCategoryClick}
         />
@@ -107,7 +129,7 @@ class GamesIndexContainer extends Component {
         categories += `${category.name}, `
       })
       categories = categories.replace(/,\s*$/, "")
-      if (categories.includes(this.state.category) || this.state.category ===null) {
+
         return(
           <li>
             <GameTile
@@ -119,7 +141,7 @@ class GamesIndexContainer extends Component {
             />
           </li>
         )
-      }
+
     })
 
     let pageTiles = []

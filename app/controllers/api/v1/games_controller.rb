@@ -5,11 +5,23 @@ class Api::V1::GamesController < ApplicationController
     if params[:category_id]
       category = Category.find(params[:category_id])
       category_games = category.games
-      page_count = category_games.size / 5 + 1
+      if category_games.size == 0
+        page_count = 1
+      elsif category_games.size % 5 == 0
+        page_count = category_games.size / 5
+      else
+        page_count = category_games.size / 5 + 1
+      end
 
-      render json: category_games, include: [:page_count]
+      selected_category_games = category.games.offset(params[:page].to_i * 5).limit(5)
+
+      render json:  { games: selected_category_games, pages: page_count }, include: [:reviews, :categories]
     else
-      page_count = Game.count / 5 + 1
+      if Game.count == 0
+        page_count = 1
+      else
+        page_count = (Game.count / 5.0).ceil
+      end
       games = Game.offset(params[:page].to_i * 5).limit(5)
       render json: { pages: page_count, games: games}, include: [:reviews, :categories]
     end
