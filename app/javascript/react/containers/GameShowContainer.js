@@ -53,6 +53,7 @@ class GameShowContainer extends Component {
           rating={review.rating}
           body={review.body}
           victory_points={review.victory_points}
+          username={review.username}
         />
       )
     })

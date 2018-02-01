@@ -6,7 +6,8 @@ class ReviewFormContainer extends Component {
     super(props);
     this.state = {
       rating: '',
-      body: ""
+      body: "",
+      errors: []
     };
     this.handleBodyChange = this.handleBodyChange.bind(this);
     this.handleRatingChange = this.handleRatingChange.bind(this);
@@ -19,7 +20,6 @@ class ReviewFormContainer extends Component {
     this.setState({ rating: event.target.value });
   }
   handleSubmit(event) {
-    console.log(this.props)
     event.preventDefault();
 
     let formPayload = {
@@ -54,7 +54,7 @@ class ReviewFormContainer extends Component {
       .then(response => {
         this.setState({ errors: [] })
         //add ID here so browser history is correct
-        browserHistory.push('/games/')
+        browserHistory.push(`/games/${this.props.routeParams.id}`)
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
     } else {
@@ -62,11 +62,16 @@ class ReviewFormContainer extends Component {
     }
   }
   render(){
-    console.log(this.props.location.pathname)
+    let errorHTML
+    if (this.state.errors.length > 0) {
+      errorHTML = this.state.errors.map(error => {
+        return <li>{error}</li>
+      })
+    }
     return(
       <div className = "row">
         <div className= "panel alert">
-          Errors here
+          <ul>{errorHTML}</ul>
         </div>
         <div className = "panel small-8 small-centered columns">
           <h2>New Review Form</h2>

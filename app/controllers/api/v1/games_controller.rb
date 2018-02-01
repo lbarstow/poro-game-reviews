@@ -13,7 +13,8 @@ class Api::V1::GamesController < ApplicationController
   end
 
   def show
-    render json: Game.find(params[:id]), include: [:reviews, :categories]
+    game = Game.find(params[:id])
+    render json: game, include: [:reviews, :categories]
   end
 
   def create
