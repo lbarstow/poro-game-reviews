@@ -145,6 +145,7 @@ class GamesIndexContainer extends Component {
     })
 
     let pageTiles = []
+    let selectedPageNum = this.state.pageNum
     if (this.state.pageNum != 1) {
       pageTiles.push(
         <PageNumberButton
@@ -160,9 +161,13 @@ class GamesIndexContainer extends Component {
         />)
     }
     for (let i = 0; i < this.state.pageCount; i++){
+      let selectedClassName = ''
+      if (i+1 == selectedPageNum) {
+        selectedClassName = 'current'
+      }
       pageTiles.push(
         <PageNumberButton
-          className=""
+          className={selectedClassName}
           pageNum={i+1}
           handleClick={this.handlePageClick}
         />)
