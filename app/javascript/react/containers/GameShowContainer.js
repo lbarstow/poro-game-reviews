@@ -29,11 +29,11 @@ class GameShowContainer extends Component {
     .then(response => response.json())
     .then(body => {
       this.setState({
-        name: body.name,
-        description: body.description,
-        categories: body.categories,
-        min_players: body.min_player_count,
-        max_players: body.max_player_count,
+        name: body.game.name,
+        description: body.game.description,
+        categories: body.game.categories,
+        min_players: body.game.min_player_count,
+        max_players: body.game.max_player_count,
         reviews: body.reviews
       })
     })
@@ -53,6 +53,7 @@ class GameShowContainer extends Component {
           rating={review.rating}
           body={review.body}
           victory_points={review.victory_points}
+          username={review.username}
         />
       )
     })
@@ -68,7 +69,7 @@ class GameShowContainer extends Component {
           />
         </div>
         <div className= "row">
-          <Link to="/games" className = "button small-3 small-offset-1 columns">Add new review</Link>
+          <Link to={this.props.location.pathname+"/reviews/new"} className = "button small-3 small-offset-1 columns">Add new review</Link>
           <Link to="/games" className = "button small-3 small-offset-3 columns end">Back to all games</Link>
         </div>
         <div className= "row">

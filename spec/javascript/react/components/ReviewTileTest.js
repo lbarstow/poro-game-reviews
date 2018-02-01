@@ -8,6 +8,7 @@ describe('ReviewTile', () => {
         rating={4}
         body="This is my review body."
         victory_points={-5}
+        username="LAURA"
       />
     )
   })
@@ -34,7 +35,7 @@ describe('ReviewTile', () => {
   })
 
   it('should have a span containing the Postedby:', () => {
-    expect(wrapper.find('span').at(0).text()).toEqual("Posted by:")
+    expect(wrapper.find('span').at(0).text()).toEqual("Posted by: LAURA")
   })
 
 

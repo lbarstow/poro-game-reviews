@@ -28,7 +28,11 @@ class Api::V1::GamesController < ApplicationController
   end
 
   def show
-    render json: Game.find(params[:id]), include: [:reviews, :categories]
+    game = Game.find(params[:id])
+    review_hash = game.reviews.as_json.map do |x|
+      x.merge!("username"=>User.find(x["user_id"]).username)
+    end
+    render json: { reviews: review_hash, game: game }, include: [:categories]
   end
 
   def create
@@ -38,7 +42,6 @@ class Api::V1::GamesController < ApplicationController
     if game.save
       render json: { game: game}, include: [:categories]
     else
-      puts game.errors.full_messages
       render json: {error: game.errors.full_messages}, status: :unprocessable_entity
     end
   end
