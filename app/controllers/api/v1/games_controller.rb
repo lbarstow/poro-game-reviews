@@ -17,12 +17,24 @@ class Api::V1::GamesController < ApplicationController
 
       render json:  { games: selected_category_games, pages: page_count }, include: [:reviews, :categories]
     else
-      if Game.count == 0
-        page_count = 1
+
+      if !params[:s]
+        games = Game.offset(params[:page].to_i * 5).limit(5)
+        if Game.count == 0
+          page_count = 1
+        else
+          page_count = (Game.count / 5.0).ceil
+        end
       else
-        page_count = (Game.count / 5.0).ceil
+        searched_games= Game.where("UPPER(name) LIKE ? OR UPPER(description) LIKE ?", "%#{params[:s].upcase}%", "%#{params[:s].upcase}%" )
+        games = searched_games.offset(params[:page].to_i * 5).limit(5)
+        if searched_games.count == 0
+          page_count = 1
+        else
+          page_count = (searched_games.count/5.0).ceil
+        end
+
       end
-      games = Game.offset(params[:page].to_i * 5).limit(5)
       render json: { pages: page_count, games: games}, include: [:reviews, :categories]
     end
   end
@@ -61,9 +73,13 @@ class Api::V1::GamesController < ApplicationController
       end
       x.merge!("username"=>User.find(x["user_id"]).username)
     end
-
-    render json: {game: game.as_json(include:[:categories]), reviews: review_hash}
-
+    total_rating = 0
+    game.reviews.each do |review|
+      total_rating += review.rating
+    end
+    average_rating = (total_rating/game.reviews.size.to_f).round(2)
+    render json: {game: game.as_json(include:[:categories]), reviews: review_hash, average_rating: average_rating}
+    
   end
 
   def create

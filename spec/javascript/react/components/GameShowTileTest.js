@@ -5,6 +5,7 @@ describe('GameShowTile', () => {
   let gd= "This is a very fun game. It's so fun i wrote a description";
   let cats = "Category 1, Category 2";
   let gName= "Test Game";
+  let rating= "4.3"
   beforeEach(() => {
     wrapper = mount(
       <GameShowTile
@@ -13,6 +14,7 @@ describe('GameShowTile', () => {
         min_players={1}
         max_players={4}
         description={gd}
+        average_rating={rating}
       />
     )
   })
@@ -40,5 +42,9 @@ describe('GameShowTile', () => {
   it('should have a p tag the game description', () => {
     expect(wrapper.find('p').length).toEqual(1);
     expect(wrapper.find('p').text()).toBe(gd)
+  })
+  it('should have an h4 tag with the rating', () => {
+    expect(wrapper.find('h4').length).toEqual(1);
+    expect(wrapper.find('h4').text()).toBe(`Average Rating: ${rating}`);
   })
 })

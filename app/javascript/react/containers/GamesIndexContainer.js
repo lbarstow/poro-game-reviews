@@ -3,6 +3,7 @@ import GameTile from "../components/GameTile";
 import GameFormTile from "../components/GameFormTile";
 import CategoryButton from "../components/CategoryButton"
 import PageNumberButton from "../components/PageNumberButton"
+import SearchForm from "../components/SearchForm"
 
 class GamesIndexContainer extends Component {
   constructor(props) {
@@ -12,11 +13,14 @@ class GamesIndexContainer extends Component {
       categories: [],
       category: null,
       pageCount: null,
-      pageNum: 1
+      pageNum: 1,
+      searchTerm: ''
     };
     this.handleCategoryClick = this.handleCategoryClick.bind(this);
     this.handlePageClick = this.handlePageClick.bind(this);
-    this.fetchGamesByPage = this.fetchGamesByPage.bind(this)
+    this.fetchGamesByPage = this.fetchGamesByPage.bind(this);
+    this.handleSearchChange = this.handleSearchChange.bind(this);
+    this.handleSearchClick = this.handleSearchClick.bind(this);
   }
 
   handleCategoryClick(event) {
@@ -24,11 +28,11 @@ class GamesIndexContainer extends Component {
     let page = 1
     if (this.state.category === category) {
       category = null;
-      this.setState({ category: null, pageNum: page })
+      this.setState({ category: null, pageNum: page, searchTerm: '' })
     } else {
-      this.setState({ category: category, pageNum: page })
+      this.setState({ category: category, pageNum: page, searchTerm: '' })
     }
-    this.fetchGamesByPage(page, category)
+    this.fetchGamesByPage(page, category, '')
   }
 
   handlePageClick(event) {
@@ -50,12 +54,12 @@ class GamesIndexContainer extends Component {
       this.setState({ pageNum: parseInt(this.state.pageNum) + 1 })
     }
 
-    this.fetchGamesByPage(text, this.state.category)
+    this.fetchGamesByPage(text, this.state.category, this.state.searchTerm)
   }
 
-  fetchGamesByPage(page, category) {
+  fetchGamesByPage(page, category, searchTerm) {
     if (category == null) {
-    fetch(`/api/v1/games?page=${page - 1}`)
+    fetch(`/api/v1/games?page=${page - 1}&s=${searchTerm}`)
       .then(response => {
         if (response.ok) {
           return response;
@@ -89,9 +93,20 @@ class GamesIndexContainer extends Component {
     }
   }
 
+  handleSearchChange(event) {
+    let searchTerm = event.target.value
+    this.setState({ searchTerm: searchTerm })
+  }
+
+  handleSearchClick(event) {
+    event.preventDefault()
+    this.setState({ pageNum: 1, category: null })
+    this.fetchGamesByPage(1, null, this.state.searchTerm)
+  }
+
 
   componentDidMount() {
-    this.fetchGamesByPage(1)
+    this.fetchGamesByPage(1, null, this.state.searchTerm)
     fetch('/api/v1/categories.json')
       .then(response => {
         if (response.ok) {
@@ -190,6 +205,10 @@ class GamesIndexContainer extends Component {
 
         <div className = "row games-container">
           <h1 className = "main-title small-8 small-centered columns">Poro Game Reviews</h1>
+          <SearchForm
+            handleChange = {this.handleSearchChange}
+            handleClick = {this.handleSearchClick}
+          />
           <hr/>
 
           <ul className="button-group even-6 ">

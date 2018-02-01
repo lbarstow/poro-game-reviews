@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 const GameTile = (props) => {
 
   return(
-    <div className = 'panel'>
+    <div className = 'panel index-tile'>
         <h4 className="game-name small-12 small-centered columns">{props.name}</h4>
         <hr/>
         <h6 className = "categories">{props.categories}</h6>
