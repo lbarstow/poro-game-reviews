@@ -26,7 +26,7 @@ class Api::V1::GamesController < ApplicationController
           page_count = (Game.count / 5.0).ceil
         end
       else
-        searched_games= Game.where("UPPER(name) LIKE ? OR UPPER(description) LIKE ?", "%#{params[:s].upcase}%", "%#{params[:s].upcase}%" ) 
+        searched_games= Game.where("UPPER(name) LIKE ? OR UPPER(description) LIKE ?", "%#{params[:s].upcase}%", "%#{params[:s].upcase}%" )
         games = searched_games.offset(params[:page].to_i * 5).limit(5)
         if searched_games.count == 0
           page_count = 1
@@ -44,7 +44,13 @@ class Api::V1::GamesController < ApplicationController
     review_hash = game.reviews.as_json.map do |x|
       x.merge!("username"=>User.find(x["user_id"]).username)
     end
-    render json: { reviews: review_hash, game: game }, include: [:categories]
+    total_rating = 0
+    game.reviews.each do |review|
+      total_rating += review.rating
+    end
+    average_rating = (total_rating/game.reviews.size.to_f).round(2)
+
+    render json: { reviews: review_hash, game: game, average_rating: average_rating }, include: [:categories]
   end
 
   def create

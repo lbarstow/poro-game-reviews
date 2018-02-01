@@ -34,7 +34,8 @@ class GameShowContainer extends Component {
         categories: body.game.categories,
         min_players: body.game.min_player_count,
         max_players: body.game.max_player_count,
-        reviews: body.reviews
+        reviews: body.reviews,
+        average_rating: body.average_rating
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -66,6 +67,7 @@ class GameShowContainer extends Component {
             categories={categories}
             min_players={this.state.min_players}
             max_players={this.state.max_players}
+            average_rating={this.state.average_rating}
           />
         </div>
         <div className= "row">
