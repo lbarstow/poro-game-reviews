@@ -30,9 +30,18 @@ class Api::V1::GamesController < ApplicationController
   def show
     game = Game.find(params[:id])
     review_hash = game.reviews.as_json.map do |x|
+      if !params[:user_id].nil?
+        #x.merge!("user_vote"=>Vote.where(user_id: params[:user_id], review_id: x["id"]))
+        x.merge!("user_vote" =>Vote.find_by(user_id: params[:user_id], review_id: x["id"]))
+      else
+        x.merge!("user_vote"=>nil)
+      end
       x.merge!("username"=>User.find(x["user_id"]).username)
+      #x.merge!("user_vote" =>Vote.find_by(user_id: 2, review_id: x["id"]))
     end
-    render json: { reviews: review_hash, game: game }, include: [:categories]
+
+    #render json: { game: game, reviews: review_hash }, include: [:categories]
+    render json: {game: game.as_json(include:[:categories]), reviews: review_hash}
   end
 
   def create
