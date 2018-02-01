@@ -31,7 +31,9 @@ class ReviewFormContainer extends Component {
     if (formPayload.user_id == null) {
       errors.push("Please sign in")
     }
-    if (formPayload.rating == null || formPayload.name == '') {
+    if (formPayload.rating == null || formPayload.rating == '') {
+      errors.push("Rating is Required")
+    }else if (formPayload.rating == null || formPayload.rating == '') {
       errors.push("Rating is Required")
     }
     if (errors.length === 0) {
@@ -78,7 +80,7 @@ class ReviewFormContainer extends Component {
           <form onSubmit={this.handleSubmit}>
             <label>
               Rating:
-              <input type="number" placeholder="Enter A Rating From 1 to 5" value={this.state.rating} onChange={this.handleRatingChange}/>
+              <input type="number" placeholder="Enter A Rating From 1 to 5" max="5" min="1" value={this.state.rating} onChange={this.handleRatingChange}/>
             </label>
             <label>
               Review:

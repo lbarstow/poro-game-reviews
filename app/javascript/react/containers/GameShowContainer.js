@@ -29,11 +29,11 @@ class GameShowContainer extends Component {
     .then(response => response.json())
     .then(body => {
       this.setState({
-        name: body.name,
-        description: body.description,
-        categories: body.categories,
-        min_players: body.min_player_count,
-        max_players: body.max_player_count,
+        name: body.game.name,
+        description: body.game.description,
+        categories: body.game.categories,
+        min_players: body.game.min_player_count,
+        max_players: body.game.max_player_count,
         reviews: body.reviews
       })
     })

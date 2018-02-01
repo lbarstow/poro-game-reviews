@@ -3,20 +3,18 @@ class Api::V1::ReviewsController < ApplicationController
   def index
     game = Game.find(params[:game_id])
     reviews = game.reviews
-    binding.pry
     render json: reviews, include: [:user]
   end
 
   def create
-    puts
     review = Review.new(review_params)
     game = Game.find(params[:game_id])
     user = User.find(params[:user_id])
     review.game = game
+    review.user = user
     if review.save
       render json: { review: review}, include: [:user]
     else
-      puts review.errors.full_messages
       render json: {error: review.errors.full_messages}, status: :unprocessable_entity
     end
   end
