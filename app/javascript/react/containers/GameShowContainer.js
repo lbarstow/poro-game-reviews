@@ -27,6 +27,10 @@ class GameShowContainer extends Component {
   }
 
   handleUpVoteClick(review_id, val){
+    let errors = []
+    errors.push("Please Sign In to Vote")
+    this.setState({ errors: errors })
+
     if(this.props.currentUserId != null) {
       if(val == 1) {
         fetch(`/api/v1/${this.props.location.pathname}?user_id=${this.props.currentUserId}&review_id=${review_id}&val=${-1}&update=destroy`)
@@ -98,6 +102,10 @@ class GameShowContainer extends Component {
     }
   }
   handleDownVoteClick(review_id, val){
+    let errors = []
+    errors.push("Please Sign In to Vote")
+    this.setState({ errors: errors })
+
     if(this.props.currentUserId != null) {
       if(val == 1) {
         fetch(`/api/v1/${this.props.location.pathname}?user_id=${this.props.currentUserId}&review_id=${review_id}&val=${-1}&update=update`)

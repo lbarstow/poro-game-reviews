@@ -16,7 +16,7 @@
 
  */
 body {
-  background-color: lightgrey;
+  background-color: #E9E9E9;
 }
 
 .panel {
@@ -33,15 +33,16 @@ body {
   padding: 10px;
   font-size: 4em;
   font-family: fantasy, cursive, sans-serif;
+  color: #424242
 }
 
 h4.game-name {
-  color: #047BA7;
+  color: #3299BB;
 
 }
 
 .view-game {
-  background-color: #fd8627;
+  background-color: #FF9900;
   color: black;
   border: 2px outset darkgrey;
 
@@ -57,7 +58,7 @@ h4.game-name {
 .categories {
   font-style: italic;
   font-weight: 500;
-  color: darkgrey;
+  color: #BCBCBC;
 }
 
 .fa-plus {
@@ -91,21 +92,21 @@ span.right {
 
 .index-tile{
   min-height: 320px;
-  border: 1px solid #333333
+  border: 1px solid #424242
 }
 
 .form-button{
-  background-color: #fd8627;
+  background-color: #FF9900;
   color: black;
-  border: 2px outset darkgrey;
+  border: 2px outset #BCBCBC;
 }
 
 .review {
-  border: 1px solid #333333
+  border: 1px solid #424242
 }
 
 .game-show {
-  border: 1px solid #333333
+  border: 1px solid #424242
 }
 
 .vp {
@@ -114,4 +115,8 @@ span.right {
   font-weight: 500;
   font-style: normal;
 
+}
+
+.button-group {
+  color: #3299BB;
 }
