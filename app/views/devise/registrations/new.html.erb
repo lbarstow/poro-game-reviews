@@ -1,5 +1,6 @@
-<h2>Sign up</h2>
 
+<div class="panel small-8 small-centered columns">
+<h2>Sign up</h2>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
@@ -32,8 +33,9 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign up", class: "button" %>
   </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+</div>
