@@ -65,14 +65,16 @@ class ReviewFormContainer extends Component {
   }
   render(){
     let errorHTML
+    let errorClass = ""
     if (this.state.errors.length > 0) {
+      errorClass = "panel alert"
       errorHTML = this.state.errors.map(error => {
         return <li>{error}</li>
       })
     }
     return(
       <div className = "row">
-        <div className= "panel alert">
+        <div className= {errorClass}>
           <ul>{errorHTML}</ul>
         </div>
         <div className = "panel small-8 small-centered columns">
