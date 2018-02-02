@@ -68,8 +68,9 @@ h4.game-name {
 
 }
 .fa-thumbs-down {
-  margin: 10px;
+  margin: 5px;
   font-size: 40px;
+  text-align: center;
 }
 .fa-thumbs-up {
   margin: 10px;
@@ -84,9 +85,27 @@ h4.game-name {
 
 span.right {
   float: right;
+  position: relative;
+  bottom: 16px;
 }
 
 .index-tile{
   min-height: 320px;
   border: 1px solid #333333
+}
+
+.review {
+  border: 1px solid #333333
+}
+
+.game-show {
+  border: 1px solid #333333
+}
+
+.vp {
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 500;
+  font-style: normal;
+  
 }

@@ -30,8 +30,8 @@ describe('ReviewTile', () => {
     expect(wrapper.find('p').text()).toBe("This is my review body.")
   })
 
-  it('should have a span containing the victory points', () => {
-    expect(wrapper.find('span').at(1).text()).toEqual("-5")
+  it('should have a i containing the victory points', () => {
+    expect(wrapper.find('i').at(2).text()).toEqual("  -5 ")
   })
 
   it('should have a span containing the Postedby:', () => {
