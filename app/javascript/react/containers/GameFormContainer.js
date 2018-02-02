@@ -78,7 +78,7 @@ class GameFormContainer extends Component {
     }else if (!Number.isInteger(parseFloat(formPayload.max_player_count))) {
       errors.push("Maximum player count must be an integer")
     }
-    if (formPayload.max_player_count < formPayload.min_player_count) {
+    if (parseInt(formPayload.max_player_count) < parseInt(formPayload.min_player_count)) {
       errors.push("Maximum players must be greater than or equal to minimum players")
     }
     if (errors.length === 0) {
