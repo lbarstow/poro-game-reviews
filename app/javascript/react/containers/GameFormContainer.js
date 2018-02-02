@@ -137,56 +137,56 @@ class GameFormContainer extends Component {
               Categories:
               <fieldset>
               <div className = "small-6 columns">
-                <p>
+                <label>
                  <input type="checkbox" id="first" name="abstract strategy" value="1" onChange = {this.handleCheckboxChange}/>
                  <label htmlFor="first">Abstract Strategy</label>
-                </p>
-                <p>
+                </label>
+                <label>
                  <input type="checkbox" id="second" name="card" value="2"  onChange = {this.handleCheckboxChange}/>
                  <label htmlFor="second">Card</label>
-                </p>
-                <p>
+                </label>
+                <label>
                    <input type="checkbox" id="third" name="cooperative" value="3" onChange = {this.handleCheckboxChange}/>
                    <label htmlFor="third">Cooperative</label>
-                </p>
-                <p>
+                </label>
+                <label>
                    <input type="checkbox" id="fourth" name="deck builder" value="4" onChange = {this.handleCheckboxChange}/>
                    <label htmlFor="fourth">Deck Builder</label>
-                </p>
-                <p>
+                </label>
+                <label>
                    <input type="checkbox" id="fifth" name="deduction" value="5" onChange = {this.handleCheckboxChange}/>
                    <label htmlFor="fifth">Deduction</label>
-                </p>
-                <p>
+                </label>
+                <label>
                   <input type="checkbox" id="sixth" name="dice" value="6" onChange = {this.handleCheckboxChange}/>
                   <label htmlFor="sixth">Dice</label>
-                </p>
+                </label>
                </div>
                <div className="small-6 columns">
-                 <p>
+                 <label>
                    <input type="checkbox" id="seventh" name="euro" value="7" onChange = {this.handleCheckboxChange}/>
                    <label htmlFor="seventh">Euro</label>
-                 </p>
-                 <p>
+                 </label>
+                 <label>
                    <input type="checkbox" id="eighth" name="party" value="8" onChange = {this.handleCheckboxChange}/>
                    <label htmlFor="eighth">Party</label>
-                 </p>
-                 <p>
+                 </label>
+                 <label>
                    <input type="checkbox" id="ninth" name="puzzle" value="9" onChange = {this.handleCheckboxChange}/>
                    <label htmlFor="ninth">Puzzle</label>
-                 </p>
-                 <p>
+                 </label>
+                 <label>
                    <input type="checkbox" id="tenth" name="roleplaying" value="10" onChange = {this.handleCheckboxChange}/>
                    <label htmlFor="tenth">Roleplaying</label>
-                 </p>
-                 <p>
+                 </label>
+                 <label>
                    <input type="checkbox" id="eleventh" name="thematic" value="11" onChange = {this.handleCheckboxChange}/>
                    <label htmlFor="eleventh">Thematic</label>
-                 </p>
-                 <p>
+                 </label>
+                 <label>
                    <input type="checkbox" id="twelveth" name="word" value="12" onChange = {this.handleCheckboxChange}/>
                    <label htmlFor="twelveth">Word</label>
-                 </p>
+                 </label>
                </div>
              </fieldset>
             </label>

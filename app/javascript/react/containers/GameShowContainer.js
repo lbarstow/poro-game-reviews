@@ -222,12 +222,15 @@ class GameShowContainer extends Component {
       let upClass = 'fa fa-thumbs-up';
       let downClass = 'fa fa-thumbs-down';
       let voteValue = 0;
+      let voteColorClass = 'vp';
       if (review.user_vote != null){
         voteValue = review.user_vote.value;
         if(review.user_vote.value == 1){
           upClass = upClass + ' upvoted';
+          voteColorClass = voteColorClass + ' upvoted'
         }else if (review.user_vote.value == -1){
           downClass = downClass + ' downvoted';
+          voteColorClass = voteColorClass + ' downvoted'
         }
       }
 
@@ -244,6 +247,7 @@ class GameShowContainer extends Component {
           upClass = {upClass}
           onUpVote = {this.handleUpVoteClick}
           onDownVote = {this.handleDownVoteClick}
+          voteColorClass = {voteColorClass}
 
         />
       )
