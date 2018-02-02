@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import GameTile from "../components/GameTile";
 import GameFormTile from "../components/GameFormTile";
+import GameFormNoUserTile from "../components/GameFormNoUserTile";
 import CategoryButton from "../components/CategoryButton"
 import PageNumberButton from "../components/PageNumberButton"
 import SearchForm from "../components/SearchForm"
@@ -14,13 +15,21 @@ class GamesIndexContainer extends Component {
       category: null,
       pageCount: null,
       pageNum: 1,
-      searchTerm: ''
+      searchTerm: '',
+      errors: []
     };
     this.handleCategoryClick = this.handleCategoryClick.bind(this);
     this.handlePageClick = this.handlePageClick.bind(this);
     this.fetchGamesByPage = this.fetchGamesByPage.bind(this);
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleSearchClick = this.handleSearchClick.bind(this);
+    this.handleNewFormNoUserClick = this.handleNewFormNoUserClick.bind(this);
+  }
+
+  handleNewFormNoUserClick(event) {
+    let errors = []
+    errors.push("Please Sign In to Enter New Game")
+    this.setState({ errors: errors })
   }
 
   handleCategoryClick(event) {
@@ -125,6 +134,15 @@ class GamesIndexContainer extends Component {
   }
 
   render() {
+    let errorHTML
+    let errorClass = ""
+    if (this.state.errors.length > 0) {
+      errorClass = "panel alert"
+      errorHTML = this.state.errors.map(error => {
+        return <li>{error}</li>
+      })
+    }
+
     let categoryButtons = this.state.categories.map( category => {
 
       return(
@@ -201,9 +219,19 @@ class GamesIndexContainer extends Component {
           handleClick={this.handlePageClick}
         />)
     }
-    return(
 
+    if (this.props.currentUserId) {
+      gameTiles.push([<li><GameFormTile/></li>])
+    } else {
+      gameTiles.push([<li><GameFormNoUserTile handleClick={this.handleNewFormNoUserClick}/></li>])
+    }
+
+
+    return(
         <div className = "row games-container">
+          <div className= {errorClass}>
+            {errorHTML}
+          </div>
           <h1 className = "main-title small-8 small-centered columns">Poro Game Reviews</h1>
           <SearchForm
             handleChange = {this.handleSearchChange}
@@ -217,7 +245,6 @@ class GamesIndexContainer extends Component {
 
           <ul className= "small-block-grid-3">
             {gameTiles}
-            <li> <GameFormTile/></li>
           </ul>
           <div className = "pagination-centered">
             <ul className="pagination">

@@ -12,10 +12,18 @@ class GameShowContainer extends Component {
       categories: [],
       min_players: null,
       max_players: null,
-      reviews: []
+      reviews: [],
+      errors: []
     }
     this.handleUpVoteClick = this.handleUpVoteClick.bind(this)
     this.handleDownVoteClick = this.handleDownVoteClick.bind(this)
+    this.handleNoUserAddReviewClick = this.handleNoUserAddReviewClick.bind(this)
+  }
+
+  handleNoUserAddReviewClick() {
+    let errors = []
+    errors.push("Please Sign In to Enter New Review")
+    this.setState({ errors: errors })
   }
 
   handleUpVoteClick(review_id, val){
@@ -188,6 +196,22 @@ class GameShowContainer extends Component {
   }
 
   render() {
+    let errorHTML
+    let errorClass = ""
+    if (this.state.errors.length > 0) {
+      errorClass = "panel alert"
+      errorHTML = this.state.errors.map(error => {
+        return <li>{error}</li>
+      })
+    }
+
+    let newReviewButton
+    if (this.props.currentUserId) {
+      newReviewButton = <Link to={this.props.location.pathname+"/reviews/new"} className = "button small-3 small-offset-1 columns form-button">Add new review</Link>
+    } else {
+      newReviewButton = <Link to={this.props.location.pathname} className = "button small-3 small-offset-1 columns form-button" onClick={this.handleNoUserAddReviewClick}>Add new review</Link>
+    }
+
     let categories = ''
     this.state.categories.forEach(category => {
       categories += `${category.name}, `
@@ -227,6 +251,9 @@ class GameShowContainer extends Component {
     return(
       <div>
         <div className= "row">
+          <div className= {errorClass}>
+            {errorHTML}
+          </div>
           <GameShowTile
             name={this.state.name}
             description={this.state.description}
@@ -237,8 +264,8 @@ class GameShowContainer extends Component {
           />
         </div>
         <div className= "row">
-          <Link to={this.props.location.pathname+"/reviews/new"} className = "button small-3 small-offset-1 columns">Add new review</Link>
-          <Link to="/games" className = "button small-3 small-offset-3 columns end">Back to all games</Link>
+          {newReviewButton}
+          <Link to="/games" className = "button small-3 small-offset-3 columns end form-button">Back to all games</Link>
         </div>
         <div className= "row">
           {reviews}
