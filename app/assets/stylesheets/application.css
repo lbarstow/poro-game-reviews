@@ -67,6 +67,20 @@ h4.game-name {
   text-shadow: 3px 3px #202020;
 
 }
+.fa-thumbs-down {
+  margin: 10px;
+  font-size: 40px;
+}
+.fa-thumbs-up {
+  margin: 10px;
+  font-size: 40px;
+}
+.upvoted{
+  color: green;
+}
+.downvoted{
+  color: purple;
+}
 
 span.right {
   float: right;

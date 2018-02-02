@@ -3,6 +3,7 @@ class Api::V1::ReviewsController < ApplicationController
   def index
     game = Game.find(params[:game_id])
     reviews = game.reviews
+    reviews.order!(id: :desc)
     render json: reviews, include: [:user]
   end
 
