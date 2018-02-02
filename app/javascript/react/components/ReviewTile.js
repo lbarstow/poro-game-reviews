@@ -10,7 +10,7 @@ const ReviewTile = (props) => {
   }
 
   return(
-    <div className= "panel">
+    <div className= "panel review">
       <h2>Rating: {props.rating}</h2>
       <h2>Review:</h2>
       <p>{props.body}</p>
@@ -18,8 +18,9 @@ const ReviewTile = (props) => {
       <span className="right">
         <i className={props.upClass} onClick={handleUp}  />
         <i className={props.downClass} onClick={handleDown}/>
-          {props.victory_points}
-        </span>
+        <i className =  {props.voteColorClass} >  {props.victory_points} </i>
+      </span>
+
     </div>
   )
 
